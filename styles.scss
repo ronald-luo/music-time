@@ -1,0 +1,160 @@
+$tablet: 768px;
+$desktop: 1024px;
+
+@mixin tablet {
+    @media(min-width: #{$tablet}) {
+        @content
+    }
+};
+
+@mixin desktop {
+    @media(min-width: #{$desktop}) {
+        @content
+    }
+};
+
+html {
+    box-sizing: border-box;
+};
+
+body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    justify-content: space-between;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    // @include tablet {
+    //     background-color: red;
+    // }
+}
+
+.top-half {
+    padding: 0 10px 0 10px;
+    .song-list-titles {
+        display: flex;
+        justify-content: space-between;
+    }
+    .song-list {
+        li {
+            display: flex;
+            justify-content: space-between;
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.progress-bar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 5px 0;
+}
+
+.progress-bar {
+    width: 50vw;
+    height: 10px;
+    // margin: 0 auto 0 auto;
+    // transform: translateX(-250px);
+    background-color: grey;
+    display: inline-block;
+    justify-self: stretch;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 10px 10px rgba(0, 255, 136, 0.1);
+    }
+
+    &:before {
+        content: "";
+        display: block;
+        position: relative;
+        height: 100%;
+        width: 0%;
+        background-color: red;
+        visibility: var(--visibility, hidden);
+        animation-name: var(--progressName, progressBar);
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-duration: var(--songDuration, 0s);
+        animation-play-state: var(--progressBarToggle, paused);
+        animation-delay: var(--progressDelay, 0s);
+    
+        @keyframes progressBar {
+            0% {
+                width: 0%;
+            }
+    
+            100% {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.current-duration {
+    display: inline-block;
+    margin: 0 1em 0 auto;
+    font-size: 14px;
+}
+
+.total-duration {
+    display: inline-block;
+    margin: 0 auto 0 1em;
+    font-size: 14px;
+}
+
+.bottom-half {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto 0 0 0;
+
+    .info {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        left: 0;
+        width: 80px;
+        // height: 103px;
+        text-align: center;
+        // opacity: 0%;
+
+        p {
+            align-self: center;
+        }
+    }
+
+    .playback-bar-container {
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+
+        .playback {
+            margin: 0 auto 0 auto;
+    
+    
+            div {
+                display: inline-block;
+            }
+    
+            svg {
+                width: 50px;
+                height: 50px;
+
+                &:hover {
+                    transform: scale(110%);
+                    cursor: pointer;
+                    transition: transform 0.1s ease-in-out;
+                }
+            }
+        }
+    }
+}
+

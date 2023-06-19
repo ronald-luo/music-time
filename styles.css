@@ -1,0 +1,121 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  justify-content: space-between;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.top-half {
+  padding: 0 10px 0 10px;
+}
+.top-half .song-list-titles {
+  display: flex;
+  justify-content: space-between;
+}
+.top-half .song-list li {
+  display: flex;
+  justify-content: space-between;
+}
+.top-half .song-list li p {
+  font-size: 14px;
+}
+
+.progress-bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 5px 0;
+}
+
+.progress-bar {
+  width: 50vw;
+  height: 10px;
+  background-color: grey;
+  display: inline-block;
+  justify-self: stretch;
+}
+.progress-bar:hover {
+  cursor: pointer;
+  box-shadow: 0px 10px 10px rgba(0, 255, 136, 0.1);
+}
+.progress-bar:before {
+  content: "";
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 0%;
+  background-color: red;
+  visibility: var(--visibility, hidden);
+  animation-name: var(--progressName, progressBar);
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-duration: var(--songDuration, 0s);
+  animation-play-state: var(--progressBarToggle, paused);
+  animation-delay: var(--progressDelay, 0s);
+}
+@keyframes progressBar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.current-duration {
+  display: inline-block;
+  margin: 0 1em 0 auto;
+  font-size: 14px;
+}
+
+.total-duration {
+  display: inline-block;
+  margin: 0 auto 0 1em;
+  font-size: 14px;
+}
+
+.bottom-half {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0 0 0;
+}
+.bottom-half .info {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  width: 80px;
+  text-align: center;
+}
+.bottom-half .info p {
+  align-self: center;
+}
+.bottom-half .playback-bar-container {
+  display: flex;
+  flex-direction: column;
+}
+.bottom-half .playback-bar-container .playback {
+  margin: 0 auto 0 auto;
+}
+.bottom-half .playback-bar-container .playback div {
+  display: inline-block;
+}
+.bottom-half .playback-bar-container .playback svg {
+  width: 50px;
+  height: 50px;
+}
+.bottom-half .playback-bar-container .playback svg:hover {
+  transform: scale(110%);
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}/*# sourceMappingURL=styles.css.map */
