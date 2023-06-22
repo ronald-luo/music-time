@@ -26,6 +26,7 @@ body {
     justify-content: space-between;
     overflow-x: hidden;
     overflow-y: hidden;
+    color: white;
 
     // @include tablet {
     //     background-color: red;
@@ -34,6 +35,8 @@ body {
 
 .top-half {
     padding: 0 10px 0 10px;
+    color: black;
+
     .song-list-titles {
         display: flex;
         justify-content: space-between;
@@ -59,7 +62,7 @@ body {
 
 .progress-bar {
     width: 50vw;
-    height: 10px;
+    height: 8px;
     // margin: 0 auto 0 auto;
     // transform: translateX(-250px);
     background-color: grey;
@@ -68,7 +71,7 @@ body {
 
     &:hover {
         cursor: pointer;
-        box-shadow: 0px 10px 10px rgba(0, 255, 136, 0.1);
+        // box-shadow: 0px 10px 10px rgba(0, 255, 136, 0.1);
     }
 
     &:before {
@@ -77,9 +80,9 @@ body {
         position: relative;
         height: 100%;
         width: 0%;
-        background-color: red;
+        background-color: white;
         visibility: var(--visibility, hidden);
-        animation-name: var(--progressName, progressBar);
+        animation-name: var(--progressBar, progressBar);
         animation-iteration-count: 1;
         animation-timing-function: linear;
         animation-duration: var(--songDuration, 0s);
@@ -93,6 +96,35 @@ body {
     
             100% {
                 width: 100%;
+            }
+        }
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        position: relative;
+        height: 12px;
+        width: 12px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px);
+        animation-name: var(--progressCircle, progressCircle);
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-duration: var(--songDuration, 0s);
+        animation-play-state: var(--progressBarToggle, paused);
+        visibility: var(--progressCircleVisibility, hidden);
+        animation-delay: var(--progressDelay, 0s);
+
+        @keyframes progressCircle {
+            0% {
+                left: 0%;
+            }
+    
+            100% {
+                left: 100%;
             }
         }
     }
@@ -115,6 +147,8 @@ body {
     justify-content: center;
     align-items: center;
     margin: auto 0 0 0;
+    background-color: black;
+    padding: 12px 0 12px 0;
 
     .info {
         position: absolute;
@@ -134,26 +168,66 @@ body {
     .playback-bar-container {
         display: flex;
         flex-direction: column;
+        // margin-top: 10px;
         // justify-content: center;
 
         .playback {
-            margin: 0 auto 0 auto;
-    
-    
-            div {
+            margin: 0 auto 7px auto;
+
+            .play-container, #prevButton, #nextButton {
                 display: inline-block;
+                width: 30px;
+                height: 30px;
+            }
+
+            .play-container {
+                border-radius: 50%;
+                background-color: white;
+                fill: rgb(0, 0, 0);
+                &:hover {
+                    transform: scale(105%);
+                    transition: transform 0.1s ease-in-out;
+                }
+
+                #pause {
+                    transform: scale(80%);
+                }
+            }
+
+            #prevButton svg {
+                fill: lightgrey;
+                &:hover {
+                    transition: fill 0.1s ease-in-out;
+                    fill: lighten(lightgrey, 20%);
+                }
+            }
+
+            #nextButton svg {
+                fill: lightgrey;
+                &:hover {
+                    transition: fill 0.1s ease-in-out;
+                    fill: lighten(lightgrey, 20%);
+                }
             }
     
             svg {
-                width: 50px;
-                height: 50px;
-
+                width: 30px;
+                height: 30px;
                 &:hover {
-                    transform: scale(110%);
+                    transform: scale(105%);
                     cursor: pointer;
                     transition: transform 0.1s ease-in-out;
                 }
             }
+        }
+    }
+
+    .progress-hover {
+        background-color: grey;
+
+        &:before {
+            background-color: #1DB954;
+            transition: background-color 0.1s ease-in-out;
         }
     }
 }

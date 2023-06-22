@@ -74,10 +74,33 @@ songId.addEventListener('ended', handleNext);
 
 // loading bar event listener
 progressBar.addEventListener('click', handleSeek);
+progressBar.addEventListener('mousemove', handleTooltip);
+progressBar.addEventListener('mouseout', handleExitTooltip)
 
-//
+// set up song list on main page
 function initPlaylistSongs (e) {
     console.log('do')
+    // document.createElement('div')
+}
+
+// create tool tip when hovering over progress bar
+function handleTooltip (e) {
+    let progressFraction = e.offsetX/progressBar.offsetWidth;
+    let seekTo = progressFraction * songId.duration;
+    totalDuration.textContent = convertSeconds(Math.round(Number(seekTo)));
+
+    // set hover style
+    progressBar.classList.add('progress-hover');
+    progressBar.style.setProperty('--progressCircleVisibility', 'visible');
+}
+
+// create tool tip when hovering over progress bar
+function handleExitTooltip (e) {
+    totalDuration.textContent = convertSeconds(Math.round(Number(songId.duration)));
+
+    // remove hover style
+    progressBar.classList.remove('progress-hover');
+    progressBar.style.setProperty('--progressCircleVisibility', 'hidden');
 }
 
 // get the fraction of the rectangle the user clicks and seek to that fraction of the song
@@ -92,9 +115,11 @@ function handleSeek (e) {
 function handleAudioReady() {
     // console.log(songId.duration)
     progressBar.style.setProperty('--visibility', 'visible');
-    progressBar.style.setProperty('--progressName', 'none');
+    progressBar.style.setProperty('--progressBar', 'none');
+    progressBar.style.setProperty('--progressCircle', 'none');
     setTimeout(() => {
-        progressBar.style.setProperty('--progressName', 'progressBar');
+        progressBar.style.setProperty('--progressBar', 'progressBar');
+        progressBar.style.setProperty('--progressCircle', 'progressCircle');
     }, 100)
     
     progressBar.style.setProperty('--songDuration', `${songId.duration}s`);

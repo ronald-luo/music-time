@@ -11,10 +11,12 @@ body {
   justify-content: space-between;
   overflow-x: hidden;
   overflow-y: hidden;
+  color: white;
 }
 
 .top-half {
   padding: 0 10px 0 10px;
+  color: black;
 }
 .top-half .song-list-titles {
   display: flex;
@@ -38,14 +40,13 @@ body {
 
 .progress-bar {
   width: 50vw;
-  height: 10px;
+  height: 8px;
   background-color: grey;
   display: inline-block;
   justify-self: stretch;
 }
 .progress-bar:hover {
   cursor: pointer;
-  box-shadow: 0px 10px 10px rgba(0, 255, 136, 0.1);
 }
 .progress-bar:before {
   content: "";
@@ -53,9 +54,9 @@ body {
   position: relative;
   height: 100%;
   width: 0%;
-  background-color: red;
+  background-color: white;
   visibility: var(--visibility, hidden);
-  animation-name: var(--progressName, progressBar);
+  animation-name: var(--progressBar, progressBar);
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-duration: var(--songDuration, 0s);
@@ -68,6 +69,32 @@ body {
   }
   100% {
     width: 100%;
+  }
+}
+.progress-bar:after {
+  content: "";
+  display: block;
+  position: relative;
+  height: 12px;
+  width: 12px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-10px);
+  animation-name: var(--progressCircle, progressCircle);
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-duration: var(--songDuration, 0s);
+  animation-play-state: var(--progressBarToggle, paused);
+  visibility: var(--progressCircleVisibility, hidden);
+  animation-delay: var(--progressDelay, 0s);
+}
+@keyframes progressCircle {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
   }
 }
 
@@ -88,6 +115,8 @@ body {
   justify-content: center;
   align-items: center;
   margin: auto 0 0 0;
+  background-color: black;
+  padding: 12px 0 12px 0;
 }
 .bottom-half .info {
   position: absolute;
@@ -105,17 +134,52 @@ body {
   flex-direction: column;
 }
 .bottom-half .playback-bar-container .playback {
-  margin: 0 auto 0 auto;
+  margin: 0 auto 7px auto;
 }
-.bottom-half .playback-bar-container .playback div {
+.bottom-half .playback-bar-container .playback .play-container, .bottom-half .playback-bar-container .playback #prevButton, .bottom-half .playback-bar-container .playback #nextButton {
   display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+.bottom-half .playback-bar-container .playback .play-container {
+  border-radius: 50%;
+  background-color: white;
+  fill: rgb(0, 0, 0);
+}
+.bottom-half .playback-bar-container .playback .play-container:hover {
+  transform: scale(105%);
+  transition: transform 0.1s ease-in-out;
+}
+.bottom-half .playback-bar-container .playback .play-container #pause {
+  transform: scale(80%);
+}
+.bottom-half .playback-bar-container .playback #prevButton svg {
+  fill: lightgrey;
+}
+.bottom-half .playback-bar-container .playback #prevButton svg:hover {
+  transition: fill 0.1s ease-in-out;
+  fill: white;
+}
+.bottom-half .playback-bar-container .playback #nextButton svg {
+  fill: lightgrey;
+}
+.bottom-half .playback-bar-container .playback #nextButton svg:hover {
+  transition: fill 0.1s ease-in-out;
+  fill: white;
 }
 .bottom-half .playback-bar-container .playback svg {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 .bottom-half .playback-bar-container .playback svg:hover {
-  transform: scale(110%);
+  transform: scale(105%);
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
+}
+.bottom-half .progress-hover {
+  background-color: grey;
+}
+.bottom-half .progress-hover:before {
+  background-color: #1DB954;
+  transition: background-color 0.1s ease-in-out;
 }/*# sourceMappingURL=styles.css.map */
