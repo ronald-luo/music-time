@@ -34,9 +34,10 @@ let data = {
 // queue setup
 let queue = Object.values(data.playlist)
 let currentIndex = 0
-console.log(queue)
+// console.log(queue)
 
 // query selectors
+let playlistTitle = document.querySelector('.playlist-title') || null
 let playlistSongs = document.querySelector('.song-list') || null
 
 let playContainer = document.querySelector('.play-container') || null
@@ -61,7 +62,8 @@ let totalDuration = document.querySelector('.total-duration') || null
 // // console.log(progressPseudo)
 
 // change on on initial load
-songName.textContent = queue[currentIndex % queue.length].songName
+playlistTitle.textContent = data.playlist_name;
+songName.textContent = queue[currentIndex % queue.length].songName;
 
 // button event listeners
 playButton.addEventListener("click", handlePlay);
@@ -75,13 +77,20 @@ songId.addEventListener('ended', handleNext);
 // loading bar event listener
 progressBar.addEventListener('click', handleSeek);
 progressBar.addEventListener('mousemove', handleTooltip);
-progressBar.addEventListener('mouseout', handleExitTooltip)
+progressBar.addEventListener('mouseout', handleExitTooltip);
 
 // set up song list on main page
-function initPlaylistSongs (e) {
-    console.log('do')
-    // document.createElement('div')
-}
+(function initPlaylistSongs (queue) {
+    console.log(queue)
+    
+    queue.map((song, index) => {
+        // console.log(song.songName)
+        let listElement = document.createElement('li');
+        listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
+        playlistSongs.appendChild(listElement)
+    })
+
+})(queue);
 
 // create tool tip when hovering over progress bar
 function handleTooltip (e) {
