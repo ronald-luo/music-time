@@ -65,7 +65,7 @@ body {
 }
 
 .progress-bar {
-    width: 50vw;
+    width: 40vw;
     height: 8px;
     // margin: 0 auto 0 auto;
     // transform: translateX(-250px);
@@ -113,7 +113,7 @@ body {
         background-color: white;
         border-radius: 50%;
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
-        transform: translateY(-10px);
+        transform: translate(-5px, -10px);
         animation-name: var(--progressCircle, progressCircle);
         animation-iteration-count: 1;
         animation-timing-function: linear;
@@ -134,6 +134,15 @@ body {
     }
 }
 
+.progress-hover {
+    background-color: grey;
+
+    &:before {
+        background-color: #1DB954;
+        transition: background-color 0.1s ease-in-out;
+    }
+}
+
 .current-duration {
     display: inline-block;
     margin: 0 1em 0 auto;
@@ -147,21 +156,34 @@ body {
 }
 
 .bottom-half {
-    display: flex;
-    justify-content: center;
+    // display: flex;
+    // justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
     margin: auto 0 0 0;
     background-color: black;
-    padding: 12px 0 12px 0;
+    padding: 12px;
 
     .info {
-        position: absolute;
+        // position: absolute;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         left: 0;
-        width: 80px;
+        width: 100px;
+        margin: 0 auto 0 0;
+        display: inline-block;
+
+        #song-name {
+            max-width: 100px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            // overflow: inherit;
+        }
+
         // height: 103px;
-        text-align: center;
+        // text-align: center;
         // opacity: 0%;
 
         p {
@@ -177,6 +199,10 @@ body {
 
         .playback {
             margin: 0 auto 7px auto;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
 
             .play-container, #prevButton, #nextButton {
                 display: inline-block;
@@ -226,12 +252,71 @@ body {
         }
     }
 
-    .progress-hover {
-        background-color: grey;
+    .playback-bar-tools {
+        // position: absolute;
+        // right: 0;
+        margin: 0 0 0 auto;
+        // width: 20%;
+        // height: 100%;
+        // background-color: red;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        // margin: 0 12px 0 0;
 
-        &:before {
-            background-color: #1DB954;
-            transition: background-color 0.1s ease-in-out;
+        .volume-icon-container {
+            margin: 0 5px 0 0;
+            #volume-icon {
+                fill: lightgrey;
+                height: 25px;
+                width: 25px;
+
+                &:hover {
+                    fill: lighten(lightgrey, 20%);
+                }
+            }
+        }
+
+        .volume-controls {
+            text-align: center;
+            width: 70px;
+            height: 5px;
+            border-radius: 3px;
+            background-color: grey;
+
+            &:before {
+                content: "";
+                display: block;
+                position: relative;
+                height: 100%;
+                width: var(--volumeBarFill, 50%);
+                background-color: white;
+            }
+
+            &:after {
+                content: "";
+                display: block;
+                position: relative;
+                height: 12px;
+                width: 12px;
+                background-color: white;
+                border-radius: 50%;
+                box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+                transform: var(--volumeCirclePosition, translate(29px, -8px));
+                visibility: var(--volumeCircleVisibility, hidden);
+            }
+
+            
+        }
+
+        .volume-hover {
+            background-color: grey;
+        
+            &:before {
+                background-color: #1DB954;
+                transition: background-color 0.1s ease-in-out;
+            }
         }
     }
 }

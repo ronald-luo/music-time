@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <title>Music Time</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
@@ -51,7 +51,7 @@
 
     <div class="bottom-half">
         <div class="info">
-            <p id="song_name">
+            <p id="song-name">
                 song name
             </p>
         </div>
@@ -81,6 +81,16 @@
                 <time class="total-duration">
                     0:00
                 </time>
+            </div>
+        </div>
+
+        <div class="playback-bar-tools">
+            <div class="volume-icon-container">
+                <svg id="volume-icon" class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge  css-c1sh5i" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="VolumeDownIcon" aria-label="fontSize large"><path d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"></path></svg>
+            </div>
+            
+            <div class="volume-controls">
+                <!-- hg -->
             </div>
         </div>
     </div>
