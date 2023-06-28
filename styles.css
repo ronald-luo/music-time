@@ -41,7 +41,7 @@ body {
 }
 
 .progress-bar {
-  width: 40vw;
+  width: 25vw;
   height: 8px;
   background-color: grey;
   display: inline-block;
@@ -132,7 +132,7 @@ body {
   display: flex;
   justify-content: flex-start;
   left: 0;
-  width: 100px;
+  width: 50px;
   margin: 0 auto 0 0;
   display: inline-block;
 }
@@ -215,7 +215,7 @@ body {
 }
 .bottom-half .playback-bar-tools .volume-controls {
   text-align: center;
-  width: 70px;
+  width: 50px;
   height: 5px;
   border-radius: 3px;
   background-color: grey;
