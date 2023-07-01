@@ -1,6 +1,6 @@
 // incoming data
 let data = {
-    "playlist_name": "best music ever",
+    "playlist_name": "Liked Songs",
     "author": "beethaven",
     "playlist": {
         "1": {
@@ -104,6 +104,7 @@ let previousVolume = 0.5;
     queue.map((song, index) => {
         // console.log(song.songName)
         let listElement = document.createElement('li');
+        listElement.style.padding = "6px 0 6px 0"
         listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
         playlistSongs.appendChild(listElement)
     });
