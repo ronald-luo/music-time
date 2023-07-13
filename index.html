@@ -105,10 +105,8 @@
                         <h2>Public Playlist</h2>
                         <h1 class="playlist-title">Liked Songs</h1>
                         <div class="playlist-data">
-                            <!-- <div class="profile-photo">pp</div> -->
-                            <p>ron</p>
-                            <p>23 songs</p>
-                            <p>1 hr 19 min</p>
+                            <p class="song-count"># songs</p>
+                            <p class="total-time"># hr # min</p>
                         </div>
                     </div>
                 </div>
@@ -116,7 +114,7 @@
             <div class="playlist-bot-container">
                 <div class="playlist-controls-container">
                     <div class="controls-play">
-                        <svg id="playlist-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <svg id="song-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M8 5V19L19 12L8 5Z" fill="black"/>
                         </svg>
                     </div>
@@ -169,8 +167,6 @@
                     </div>
                     <hr/>
                     <ol class="song-list">
-                        <li>
-                        </li>
                     </ol>
                 </div>
             </div>
@@ -181,9 +177,14 @@
         <div class="info">
             <div class="album-art">
             </div>
-            <p id="song-name">
-                song name
-            </p>
+            <div class="info-name-container">
+                <p id="song-name">
+                    song name
+                </p>
+                <p id="album-name">
+                    album
+                </p>
+            </div>
         </div>
 
         <div class="playback-bar-container">

@@ -36,7 +36,13 @@ let data = {
 let playlistTitle = document.querySelector('.playlist-title') || null
 let playlistSongs = document.querySelector('.song-list') || null
 
+let songCount = document.querySelector('.song-count') || null
+let totalTime = document.querySelector('.total-time') || null
+
 let playContainer = document.querySelector('.play-container') || null
+
+let playlistControls = document.querySelector('.controls-play') || null
+let songPlay = document.getElementById('song-play') || null
 
 let pauseButton = document.getElementById('pause') || null
 let playButton = document.getElementById('play') || null
@@ -48,6 +54,7 @@ let songId = document.getElementById('song_id') || null
 let songSrc = document.getElementById('song_src') || null
 
 let songName = document.getElementById('song-name') || null
+let albumName = document.getElementById('album-name') || null
 
 let progressBar = document.querySelector('.progress-bar') || null
 
@@ -63,18 +70,25 @@ playButton.addEventListener("click", handlePlay);
 nextButton.addEventListener("click", handleNext);
 prevButton.addEventListener("click", handlePrev);
 
+//playlist button controls
+playlistControls.addEventListener("click", (e) => {
+    songId.paused ? handlePlay(e) : handlePause(e)
+});
+
 // audio event listners
 songId.addEventListener('canplaythrough', handleAudioReady);
 songId.addEventListener('ended', handleNext);
 
 // loading bar event listener
 progressBar.addEventListener('click', handleSeek);
+progressBar.addEventListener('mousedown', handleSeek);
 progressBar.addEventListener('mousemove', handleTooltip);
 progressBar.addEventListener('mouseout', handleExitTooltip);
 
 // music controls
 volumeIconContainer.addEventListener('click', handleMute);
 volumeControl.addEventListener('click', handleChangeVolume);
+volumeControl.addEventListener('mousedown', handleChangeVolume);
 volumeControl.addEventListener('mousemove', handleVolumeHover);
 volumeControl.addEventListener('mouseout', handleExitVolumeHover);
 
@@ -95,56 +109,80 @@ let previousVolume = 0.5;
     songId.volume = previousVolume;
 })();
 
-// set up song list on main page
-(function initPlaylistSongs (queue) {
+// set up song list (song durations too), and playlist data
+(function initSongDurations (queue) {
     // change playlist title and song name on initial load
     playlistTitle.textContent = data.playlist_name;
     songName.textContent = queue[currentIndex % queue.length].songName;
+    // albumName.textContent = queue[currentIndex % queue.length].albumName;
+    let songDurations = []
 
-    queue.map((song, index) => {
-        let listElement = document.createElement('li');
-        listElement.style.padding = "6px 0 6px 0"
-        listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
-        playlistSongs.appendChild(listElement)
-    });
-    // queue.map((song, index) => {
-    //     let listElement = document.createElement('li');
-    //     listElement.style.padding = "6px 0 6px 0"
-    //     listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
-    //     playlistSongs.appendChild(listElement)
-    // });
-    // queue.map((song, index) => {
-    //     let listElement = document.createElement('li');
-    //     listElement.style.padding = "6px 0 6px 0"
-    //     listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
-    //     playlistSongs.appendChild(listElement)
-    // });
-    // queue.map((song, index) => {
-    //     let listElement = document.createElement('li');
-    //     listElement.style.padding = "6px 0 6px 0"
-    //     listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
-    //     playlistSongs.appendChild(listElement)
-    // });
-    // queue.map((song, index) => {
-    //     let listElement = document.createElement('li');
-    //     listElement.style.padding = "6px 0 6px 0"
-    //     listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
-    //     playlistSongs.appendChild(listElement)
-    // });
-    // queue.map((song, index) => {
-    //     let listElement = document.createElement('li');
-    //     listElement.style.padding = "6px 0 6px 0"
-    //     listElement.innerHTML = `<p>${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>1:00</p>`
-    //     playlistSongs.appendChild(listElement)
-    // });
+    queue.map(async (song, index) => {
+        // create new audio element and insert it onto the page
+        let audioElement = document.createElement('audio');
+        audioElement.setAttribute('src', song.fileName)
+        audioElement.innerHTML = `<source src="${song.fileName}" type="audio/mp3"></source>`
+        document.body.appendChild(audioElement)
+
+        // set up song list on main page after 500 ms
+        setTimeout(() => {
+            let listElement = document.createElement('li');
+            listElement.style.padding = "6px 0 6px 0"
+            listElement.innerHTML = `<p class="song-${index + 1}">${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+            listElement.addEventListener('mousemove',() => {
+                listElement.innerHTML = `<p class="song-${index + 1}"><svg class="song-play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="black"/></svg></p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+                document.querySelector('.song-play').addEventListener('click', (e) => {
+                    listElement.innerHTML = `<p class="song-${index + 1}"><svg class="song-pause" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M7 18H9V6H7V18ZM11 22H13V2H11V22ZM3 14H5V10H3V14ZM15 18H17V6H15V18ZM19 10V14H21V10H19Z" fill="black"/></svg></p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+                    currentIndex = index
+                    songId.setAttribute('src', queue[((currentIndex % queue.length) + queue.length) % queue.length].fileName)
+                    songSrc.setAttribute('src', queue[((currentIndex % queue.length) + queue.length) % queue.length].fileName)
+                    handlePlay(e)
+                });
+            })
+            listElement.addEventListener('mouseout',() => {
+                listElement.innerHTML = `<p class="song-${index + 1}">${index + 1}</p> <p>${song.songName}</p> <p>album ${index + 1}</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+            })
+
+            playlistSongs.appendChild(listElement)
+            songDurations.push(audioElement.duration)
+            document.body.removeChild(audioElement)
+        }, 500)
+    })
+
+    // set playlist data song count and total time
+    setTimeout(() => {
+        let formatTime = convertSeconds(Math.round(Number(songDurations.reduce((cum, cur) => cum + cur, 0))));
+        formatTime = formatTime.split(':');
+        if (formatTime.length === 3) {
+            totalTime.textContent = `${formatTime[0]} hr ${formatTime[1]} min`;
+        }
+        if (formatTime.length === 2) {
+            totalTime.textContent = `${formatTime[0]} min ${formatTime[1]} s`;
+        }
+        songCount.textContent = `${songDurations.length} songs`;
+    }, 500)
+
 })(queue);
 
 // create a timer that fires every 500ms
 (function initTimer() {
     let intervalId = setInterval(() => {
         currentDuration.textContent = convertSeconds(Math.round(Number(songId.currentTime)));
+        highlightCurrentSong()
     }, 500)
 })();
+
+// highlight current song
+function highlightCurrentSong () {
+    let temp = 1 + ((currentIndex % queue.length) + queue.length) % queue.length
+    document.querySelector(`.song-${temp}`).style.color = '#1DB954';
+    if (temp === 1) {
+        document.querySelector(`.song-${queue.length}`).style.color = 'lightgrey';
+    } 
+    else if (temp > 1) {
+        document.querySelector(`.song-${((currentIndex % queue.length) + queue.length) % queue.length}`).style.color = 'lightgrey';
+    } 
+};
 
 // toggle mute when the icon is clicked
 function handleMute() {
@@ -254,18 +292,17 @@ function handlePause(e) {
     // console.log('pause')
 
     if (playButton === null) {
-        // console.log('replace')
-
         let element = document.createElement('div')
         
         let playContainer = document.querySelector('.play-container') || null
         playContainer.appendChild(element)
         playContainer.removeChild(document.querySelector('.play-container2'))
         element.innerHTML = `<svg id="play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="black"/></svg>`
-
         pauseButton = null
         element.addEventListener("click", handlePlay);
         element.setAttribute('class', 'play-container2')
+        
+        playlistControls.innerHTML = `<svg id="playlist-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="black"/></svg>`
 
         if (!songId.paused) {
             songId.pause();
@@ -284,12 +321,10 @@ function handlePlay(e) {
     // console.log('play')
 
     if (pauseButton === null) {
-        // console.log('replace')
-
         let element = document.createElement('div')
         element.setAttribute('class', 'play-container2')
-
         let playContainer2 = document.querySelector('.play-container2') || null
+
         if (playContainer2 !== null) {
             playContainer.removeChild(playContainer2);
         } else {
@@ -298,22 +333,21 @@ function handlePlay(e) {
 
         element.innerHTML = `<svg id="pause" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 19H10V5H6V19ZM14 5V19H18V5H14Z" fill="black"/></svg>`
         playContainer.appendChild(element)
-
         playButton = null;
-
         element.addEventListener("click", handlePause);
-        
-        // songId.volume = 0.5;
 
+        playlistControls.innerHTML = `<svg id="playlist-pause" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 19H10V5H6V19ZM14 5V19H18V5H14Z" fill="black"/></svg>`
+        
         if (songId.paused) {
             songId.play()
             progressBar.style.setProperty('--visibility', 'visible');
             progressBar.style.setProperty('--progressBarToggle', 'running');
             progressBar.style.setProperty('--songDuration', `${songId.duration}s`);
-            // handleProgress()
+
         }
-        
-    }
+
+    } 
+    
 };
 
 // play last song in queue
