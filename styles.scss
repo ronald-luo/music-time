@@ -91,7 +91,8 @@ body {
             &:hover {    
                 &::-webkit-scrollbar-thumb {
                     transition: background-color 0.4s ease-in-out;
-                    background-color: lighten(rgba(26, 26, 26, 0.9), 100%);
+                    background-color: lighten(rgba(26, 26, 26, 0.9), 10%);
+                    border: 5px solid lighten(rgba(26, 26, 26, 0.9), 10%);
                 }
             }
             

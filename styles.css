@@ -66,7 +66,8 @@ body {
 .top-half .sidebar .sidebar-albums:hover::-webkit-scrollbar-thumb {
   -webkit-transition: background-color 0.4s ease-in-out;
   transition: background-color 0.4s ease-in-out;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(52, 52, 52, 0.9);
+  border: 5px solid rgba(52, 52, 52, 0.9);
 }
 .top-half .sidebar .sidebar-albums::-webkit-scrollbar {
   position: absolute;
