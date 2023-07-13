@@ -18,24 +18,182 @@ body {
 }
 
 .top-half {
-  padding: 0 10px 0 10px;
-  color: black;
+  display: grid;
+  grid-template-columns: 80px auto;
+  height: 93%;
 }
-.top-half .song-list-titles {
+.top-half .sidebar {
+  background-color: black;
+  display: grid;
+  grid-template-rows: 1fr 8fr;
+  grid-row-gap: 10px;
+  padding: 10px;
+}
+.top-half .sidebar .sidebar-home {
+  background-color: #121212;
+  padding: 5px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: space-evenly;
+}
+.top-half .sidebar .sidebar-home a {
+  display: flex;
+  justify-content: center;
+}
+.top-half .sidebar .sidebar-home a svg {
+  width: 100%;
+  height: auto;
+}
+.top-half .sidebar .sidebar-home a svg path {
+  fill: lightgrey;
+}
+.top-half .sidebar .sidebar-home a:hover svg path {
+  transition: fill 0.1s ease-in-out;
+  fill: white;
+}
+.top-half .sidebar .sidebar-albums {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #121212;
+  border-radius: 5px;
+}
+.top-half .sidebar .sidebar-albums a {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0;
+}
+.top-half .sidebar .sidebar-albums a svg {
+  width: 100%;
+  height: auto;
+}
+.top-half .sidebar .sidebar-albums a svg path {
+  fill: lightgrey;
+}
+.top-half .sidebar .sidebar-albums a:hover svg path {
+  transition: fill 0.1s ease-in-out;
+  fill: white;
+}
+.top-half .sidebar .sidebar-albums .album {
+  width: 40px;
+  height: 40px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  margin: 6px 0 6px 0;
+}
+.top-half .sidebar .sidebar-albums .album:hover {
+  cursor: pointer;
+}
+.top-half .playlist-page {
+  display: flex;
+  flex-direction: column;
+}
+.top-half .playlist-page .playlist-top-container {
+  background: rgb(88, 102, 94);
+  background: linear-gradient(52deg, rgb(88, 102, 94) 0%, rgb(48, 56, 52) 100%);
+  padding: 16px;
+}
+.top-half .playlist-page .playlist-top-container .playlist-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.top-half .playlist-page .playlist-top-container .playlist-menu .navigation svg {
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+}
+.top-half .playlist-page .playlist-top-container .playlist-menu .navigation svg path {
+  fill: lightgrey;
+}
+.top-half .playlist-page .playlist-top-container .playlist-menu .profile a svg {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+.top-half .playlist-page .playlist-top-container .info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.top-half .playlist-page .playlist-top-container .info-container .album-art {
+  width: 100px;
+  height: 100px;
+  background-color: darkgreen;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.top-half .playlist-page .playlist-top-container .info-container .playlist-info h2 {
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: bold;
+}
+.top-half .playlist-page .playlist-top-container .info-container .playlist-info h1 {
+  font-size: 18px;
+  line-height: 29px;
+  font-weight: bold;
+}
+.top-half .playlist-page .playlist-top-container .info-container .playlist-info .playlist-data {
+  font-size: 13px;
+  line-height: 21px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 6px;
+}
+.top-half .playlist-page .playlist-bot-container {
+  background: rgb(36, 41, 38);
+  background: linear-gradient(185deg, rgba(36, 41, 38, 0.88) 0%, rgb(18, 18, 18) 100%);
+  height: 100%;
+  padding: 10px;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-controls-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-controls-container div svg {
+  height: 30px;
+  width: 30px;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-controls-container div svg path {
+  fill: lightgrey;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-controls-container div svg:hover {
+  cursor: pointer;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-controls-container div svg:hover path {
+  transition: fill 0.1s ease-in-out;
+  fill: white;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-songs {
+  padding: 0 10px 0 10px;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-songs .song-list-titles {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
 }
-.top-half .song-list-titles #duration-icon {
+.top-half .playlist-page .playlist-bot-container .playlist-songs .song-list-titles #duration-icon {
   width: 20px;
   height: 20px;
 }
-.top-half .song-list li {
+.top-half .playlist-page .playlist-bot-container .playlist-songs .song-list-titles #duration-icon path {
+  fill: lightgrey;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-songs .song-list li {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
-.top-half .song-list li p {
+.top-half .playlist-page .playlist-bot-container .playlist-songs .song-list li p {
   font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .progress-bar-container {
@@ -135,6 +293,7 @@ body {
   margin: auto 0 0 0;
   background-color: black;
   padding: 12px;
+  height: 7%;
 }
 .bottom-half .info {
   display: flex;
@@ -180,17 +339,17 @@ body {
 .bottom-half .playback-bar-container .playback .play-container #pause {
   transform: scale(80%);
 }
-.bottom-half .playback-bar-container .playback #prevButton svg {
+.bottom-half .playback-bar-container .playback #prevButton svg path {
   fill: lightgrey;
 }
-.bottom-half .playback-bar-container .playback #prevButton svg:hover {
+.bottom-half .playback-bar-container .playback #prevButton svg path:hover {
   transition: fill 0.1s ease-in-out;
   fill: white;
 }
-.bottom-half .playback-bar-container .playback #nextButton svg {
+.bottom-half .playback-bar-container .playback #nextButton svg path {
   fill: lightgrey;
 }
-.bottom-half .playback-bar-container .playback #nextButton svg:hover {
+.bottom-half .playback-bar-container .playback #nextButton svg path:hover {
   transition: fill 0.1s ease-in-out;
   fill: white;
 }
@@ -213,12 +372,13 @@ body {
 .bottom-half .playback-bar-tools .volume-icon-container {
   margin: 0 5px 0 0;
 }
-.bottom-half .playback-bar-tools .volume-icon-container #volume-icon {
+.bottom-half .playback-bar-tools .volume-icon-container #volume-icon path {
   fill: lightgrey;
   height: 25px;
   width: 25px;
 }
-.bottom-half .playback-bar-tools .volume-icon-container #volume-icon:hover {
+.bottom-half .playback-bar-tools .volume-icon-container #volume-icon path:hover {
+  cursor: pointer;
   fill: white;
 }
 .bottom-half .playback-bar-tools .volume-controls {

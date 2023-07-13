@@ -30,35 +30,234 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
     color: white;
-
-    // @include tablet {
-    //     background-color: red;
-    // }
 }
 
 .top-half {
-    padding: 0 10px 0 10px;
-    color: black;
+    display: grid;
+    grid-template-columns: 80px auto;
+    height: 93%;
 
-    .song-list-titles {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        // justify-content: space-between;
-        align-items: center;
+    .sidebar {
+        background-color: black;
+        display:  grid;
+        grid-template-rows: 1fr 8fr;
+        grid-row-gap: 10px;
+        padding: 10px;
+        
+        .sidebar-home {
+            background-color: #121212;
+            padding: 5px;
+            border-radius: 5px;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            // flex-direction: column;
+            justify-content: space-evenly;
 
-        #duration-icon {
-            // margin: auto 0 auto 0;
-            width: 20px;
-            height: 20px;
+            a {
+                display: flex;
+                justify-content: center;
+
+                svg {
+                    width: 100%;
+                    height: auto;
+
+                    path {
+                        fill: lightgrey;
+                    }
+                }
+
+                &:hover {
+                    svg {
+                        path {
+                            transition: fill 0.1s ease-in-out;
+                            fill: lighten(lightgrey, 20%);
+                        }
+                    }
+                }
+            }
+        }
+
+        .sidebar-albums {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #121212;
+            border-radius: 5px;
+
+            a {
+                display: flex;
+                justify-content: center;
+                margin: 10px 0 10px 0;
+
+                svg {
+                    width: 100%;
+                    height: auto;
+
+                    path {
+                        fill: lightgrey;
+                    }
+                }
+
+                &:hover {
+                    svg {
+                        path {
+                            transition: fill 0.1s ease-in-out;
+                            fill: lighten(lightgrey, 20%);
+                        }
+                    }
+                }
+            }
+
+            .album {
+                width: 40px;
+                height: 40px;
+                background-color: darkgreen;
+                border-radius: 5px;
+                margin: 6px 0 6px 0;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
     }
-    .song-list {
-        li {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            p {
-                font-size: 14px;
-                // text-align: center;
+
+    .playlist-page {
+        // padding: 0 10px 0 10px;
+        // color: black;
+        display: flex;
+        flex-direction: column;
+
+        .playlist-top-container {
+            background: rgb(88,102,94);
+            background: linear-gradient(52deg, rgba(88,102,94,1) 0%, rgba(48,56,52,1) 100%);
+            padding: 16px;
+
+            .playlist-menu {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 50px;
+                
+                .navigation {
+                    svg {
+                        padding: 2px;
+                        background-color: rgba(0, 0, 0, 0.7);
+                        border-radius: 50%;
+                        path {
+                            fill: lightgrey;
+                        }
+                    }
+                }
+
+                .profile {
+                    a svg {
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 50%;
+                    }                
+                }
+            }
+
+            .info-container {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+
+                .album-art {
+                    width: 100px;
+                    height: 100px;
+                    background-color: darkgreen;
+                    border-radius: 5px;
+                    margin-right: 10px;
+                }
+
+                .playlist-info {
+                    h2 {
+                        font-size: 10px;
+                        line-height: 16px;
+                        font-weight: bold;
+                    }
+
+                    h1 {
+                        font-size: 18px;
+                        line-height: 29px;
+                        font-weight: bold;
+                    }
+
+                    .playlist-data {
+                        font-size: 13px;
+                        line-height: 21px;
+                        display: grid;
+                        grid-template-columns: auto auto auto;
+                        grid-gap: 6px;
+
+                    }
+                }
+            }
+        }
+
+        .playlist-bot-container {
+            background: rgb(36,41,38);
+            background: linear-gradient(185deg, rgba(36,41,38,0.88) 0%, rgba(18,18,18,1) 100%);
+            height: 100%;
+            padding: 10px;
+
+            .playlist-controls-container {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 50px;
+
+                div svg {
+                    height: 30px;
+                    width: 30px;
+    
+                    path {
+                        fill: lightgrey;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        path {
+                            transition: fill 0.1s ease-in-out;
+                            fill: lighten(lightgrey, 20%);
+                        }
+                    }
+                }
+            }
+
+            .playlist-songs {
+                padding: 0 10px 0 10px;
+
+                .song-list-titles {
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    align-items: center;
+    
+                    #duration-icon {
+                        width: 20px;
+                        height: 20px;
+                        path { 
+                            fill: lightgrey;
+                        }
+                    }
+                }
+
+                .song-list {
+                    li {
+                        display: grid;
+                        grid-template-columns: repeat(5, 1fr);
+                        p {
+                            font-size: 14px;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                        }
+                    }
+                }
             }
         }
     }
@@ -172,6 +371,7 @@ body {
     margin: auto 0 0 0;
     background-color: black;
     padding: 12px;
+    height: 7%;
 
     .info {
         // position: absolute;
@@ -232,7 +432,7 @@ body {
                 }
             }
 
-            #prevButton svg {
+            #prevButton svg path {
                 fill: lightgrey;
                 &:hover {
                     transition: fill 0.1s ease-in-out;
@@ -240,7 +440,7 @@ body {
                 }
             }
 
-            #nextButton svg {
+            #nextButton svg path {
                 fill: lightgrey;
                 &:hover {
                     transition: fill 0.1s ease-in-out;
@@ -276,12 +476,15 @@ body {
         .volume-icon-container {
             margin: 0 5px 0 0;
             #volume-icon {
-                fill: lightgrey;
-                height: 25px;
-                width: 25px;
+                path {
+                    fill: lightgrey;
+                    height: 25px;
+                    width: 25px;
 
-                &:hover {
-                    fill: lighten(lightgrey, 20%);
+                    &:hover {
+                        cursor: pointer;
+                        fill: lighten(lightgrey, 20%);
+                    }
                 }
             }
         }
