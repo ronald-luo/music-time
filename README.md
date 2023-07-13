@@ -1,3 +1,3 @@
 # Music-Time
 
-Try it here: https://github.com/ronald-luo/music-time
+Try it here: https://ronald-luo.github.io/music-time/
