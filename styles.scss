@@ -185,6 +185,9 @@ body {
                         font-size: 18px;
                         line-height: 29px;
                         font-weight: bold;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
                     }
 
                     .playlist-data {
@@ -193,6 +196,9 @@ body {
                         display: grid;
                         grid-template-columns: auto auto auto;
                         grid-gap: 6px;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
 
                     }
                 }
@@ -236,6 +242,12 @@ body {
                     display: grid;
                     grid-template-columns: repeat(5, 1fr);
                     align-items: center;
+
+                    h2 {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
     
                     #duration-icon {
                         width: 20px;
@@ -365,10 +377,11 @@ body {
 .bottom-half {
     position: absolute;
     bottom: 0;
+    right: 0;
+    left: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    margin: auto 0 0 0;
     background-color: black;
     padding: 12px;
     height: 7%;

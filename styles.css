@@ -136,6 +136,9 @@ body {
   font-size: 18px;
   line-height: 29px;
   font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .top-half .playlist-page .playlist-top-container .info-container .playlist-info .playlist-data {
   font-size: 13px;
@@ -143,6 +146,9 @@ body {
   display: grid;
   grid-template-columns: auto auto auto;
   grid-gap: 6px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .top-half .playlist-page .playlist-bot-container {
   background: rgb(36, 41, 38);
@@ -177,6 +183,11 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
+}
+.top-half .playlist-page .playlist-bot-container .playlist-songs .song-list-titles h2 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .top-half .playlist-page .playlist-bot-container .playlist-songs .song-list-titles #duration-icon {
   width: 20px;
@@ -287,10 +298,11 @@ body {
 .bottom-half {
   position: absolute;
   bottom: 0;
+  right: 0;
+  left: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  margin: auto 0 0 0;
   background-color: black;
   padding: 12px;
   height: 7%;
