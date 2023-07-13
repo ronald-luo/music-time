@@ -91,11 +91,17 @@ body {
 .top-half .sidebar .sidebar-albums a {
   display: flex;
   justify-content: center;
-  margin: 10px 0 10px 0;
+  margin: 10px 10px 10px auto;
+}
+@media (min-width: 768px) {
+  .top-half .sidebar .sidebar-albums a {
+    margin: 10px auto 10px auto;
+  }
 }
 .top-half .sidebar .sidebar-albums a svg {
   width: 25px;
   height: auto;
+  margin: auto;
 }
 .top-half .sidebar .sidebar-albums a svg path {
   fill: lightgrey;

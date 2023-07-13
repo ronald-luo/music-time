@@ -121,11 +121,16 @@ body {
             a {
                 display: flex;
                 justify-content: center;
-                margin: 10px 0 10px 0;
+                margin: 10px 10px 10px auto;
 
+                @include tablet {
+                    margin: 10px auto 10px auto;
+                }
+                
                 svg {
                     width: 25px;
                     height: auto;
+                    margin: auto;
 
                     path {
                         fill: lightgrey;
