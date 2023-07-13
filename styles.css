@@ -121,7 +121,7 @@ body {
   -webkit-transition: background-color 0.4s ease-in-out;
   transition: background-color 0.4s ease-in-out;
   background-color: rgba(199, 199, 199, 0.1);
-  border: 5px solid rgba(199, 199, 199, 0.1);
+  border: 7px solid rgba(199, 199, 199, 0.1);
 }
 .top-half .playlist-page::-webkit-scrollbar {
   position: absolute;
@@ -572,6 +572,9 @@ body {
 @media (min-width: 768px) {
   .bottom-half .playback-bar-tools .volume-controls {
     width: 100px;
+  }
+  .bottom-half .playback-bar-tools .volume-controls:after {
+    transform: var(--volumeCirclePosition, translate(44px, -8px));
   }
 }
 .bottom-half .playback-bar-tools .volume-hover {

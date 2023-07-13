@@ -163,7 +163,7 @@ body {
             &::-webkit-scrollbar-thumb {
                 transition: background-color 0.4s ease-in-out;
                 background-color: rgba(199, 199, 199, 0.1);
-                border: 5px solid rgba(199, 199, 199, 0.1);
+                border: 7px solid rgba(199, 199, 199, 0.1);
             }
         }
         
@@ -712,6 +712,10 @@ body {
 
             @include tablet {
                 width: 100px;
+
+                &:after {
+                    transform: var(--volumeCirclePosition, translate(44px, -8px));
+                }
             }
         }
 
