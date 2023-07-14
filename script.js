@@ -130,11 +130,11 @@ let previousVolume = 0.5;
         setTimeout(() => {
             let listElement = document.createElement('li');
             listElement.style.padding = "6px 0 6px 0"
-            listElement.innerHTML = `<p class="song-${index + 1}">${index + 1}</p> <p>${song.songName}</p> <p>album</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+            listElement.innerHTML = `<p class="song-${index + 1}">${index + 1}</p> <p>${song.songName}</p> <p>beethaven's best</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
             listElement.addEventListener('mousemove',() => {
-                listElement.innerHTML = `<p class="song-${index + 1}"><svg class="song-play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="black"/></svg></p> <p>${song.songName}</p> <p>album</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+                listElement.innerHTML = `<p class="song-${index + 1}"><svg class="song-play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="black"/></svg></p> <p>${song.songName}</p> <p>beethaven's best</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
                 document.querySelector('.song-play').addEventListener('click', (e) => {
-                    listElement.innerHTML = `<p class="song-${index + 1}"><svg class="song-pause" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M7 18H9V6H7V18ZM11 22H13V2H11V22ZM3 14H5V10H3V14ZM15 18H17V6H15V18ZM19 10V14H21V10H19Z" fill="black"/></svg></p> <p>${song.songName}</p> <p>album</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+                    listElement.innerHTML = `<p class="song-${index + 1}"><svg class="song-pause" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M7 18H9V6H7V18ZM11 22H13V2H11V22ZM3 14H5V10H3V14ZM15 18H17V6H15V18ZM19 10V14H21V10H19Z" fill="black"/></svg></p> <p>${song.songName}</p> <p>beethaven's best</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
                     currentIndex = index
                     songId.setAttribute('src', queue[((currentIndex % queue.length) + queue.length) % queue.length].fileName)
                     songSrc.setAttribute('src', queue[((currentIndex % queue.length) + queue.length) % queue.length].fileName)
@@ -142,7 +142,7 @@ let previousVolume = 0.5;
                 });
             })
             listElement.addEventListener('mouseout',() => {
-                listElement.innerHTML = `<p class="song-${index + 1}">${index + 1}</p> <p>${song.songName}</p> <p>album</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
+                listElement.innerHTML = `<p class="song-${index + 1}">${index + 1}</p> <p>${song.songName}</p> <p>beethaven's best</p> <p>January 1 2000</p> <p>${convertSeconds(Math.round(Number(audioElement.duration)))}</p>`
             })
 
             playlistSongs.appendChild(listElement)
