@@ -152,7 +152,7 @@ body {
                 height: 40px;
                 background-color: darkgreen;
                 border-radius: 5px;
-                margin: 10px 0 10px 0;
+                margin: 16px 0 16px 0;
 
                 &:hover {
                     cursor: pointer;
@@ -282,6 +282,12 @@ body {
                         overflow: hidden;
                         white-space: nowrap;
                         color: lightgrey;
+
+                        .author {
+                            &:hover {
+                                color: white;
+                            }
+                        }
 
                         .song-count {
                             color: white;
@@ -588,9 +594,9 @@ body {
 
         .album-art {
             display: inline-block;
-            min-width: 40px;
-            min-height: 40px;
-            background-color: darkgreen;
+            width: 40px;
+            height: 40px;
+            // background-color: darkgreen;
             border-radius: 5px;
         }
 
